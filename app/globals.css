@@ -1,0 +1,1106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #888;
+  /* color of the scrollbar track */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #76Ed97;
+  /* color of the scrollbar thumb */
+  border-radius: 5px;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+
+@font-face {
+  font-family: 'Sofia Pro Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Sofia Pro Regular'), url('./fonts/Sofia Pro Regular Az.woff') format('woff');
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: 'Sofia Pro Regular' !important;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+main div {
+  display: flex;
+}
+
+.s-welcome {
+  background-color: #1E4848;
+  background-size: cover;
+}
+
+.button-raffle {
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: small;
+}
+
+.button-raffle:hover {
+  background-color: #f0f0f0;
+  color: #333;
+  /* Add hover styles */
+}
+
+.button-raffle.clicked {
+  outline: none; /* Remove default outline on click */
+  /* Add clicked styles */
+}
+
+.header {
+  position: fixed;
+  z-index: 999;
+  height: 111px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #1A2828;
+}
+
+.header-nav {
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+.header-buttons div {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mobile-header-buttons {
+  display: none;
+}
+
+.mobile-header-buttons div {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header-buttons {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+
+.footer {
+  width: 100%;
+  background-color: #1A2828;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.footer-top {
+  justify-content: space-evenly;
+  align-items: center;
+  height: 394px;
+  padding: 20px;
+}
+
+.footer-menu {
+  width: 200px;
+  justify-content: space-around;
+  color: #76ED97;
+}
+
+.footer-bottom {
+  color: white;
+  align-items: center;
+  height: 50px;
+  background-color: #1E4848;
+  justify-content: center;
+  font-size: small;
+}
+
+.branding {
+  overflow: auto;
+  padding-top: 170px;
+  padding-bottom: 60px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.brand {
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+  padding: 10px;
+  position: relative;
+}
+
+.brand-image {
+  width: 332px;
+}
+
+.brand-title {
+  position: absolute;
+  top: 32px;
+  left: 39px;
+  color: white;
+  font-weight: 800;
+}
+
+.brand .button-raffle {
+  position: absolute;
+  top: 78px;
+  left: 30px;
+  font-size: smaller;
+}
+
+.splitter {
+  height: 3px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.token-input {
+  padding-left: 5px;
+  width: 100px;
+  height: 41px;
+  background: transparent;
+  color: white;
+  text-align: center;
+  outline: none; /* Add this line to remove outline */
+  /* font-family: sans-serif; */
+}
+
+.search-input {
+  width: 74%;
+  height: 41px;
+  background: transparent;
+  color: white;
+  border: 1px solid #76ED97;
+  border-radius: 10px;
+  /* font-family: sans-serif; */
+  padding-left: 10px;
+}
+
+.search-input:focus-visible {
+  outline: none;
+
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+  /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: white;
+}
+
+.scrollable-section {
+  width: 100%;
+  /* Maximum width of the scrollable section */
+  overflow-x: auto;
+  justify-content: center;
+  scroll-behavior: smooth;
+}
+
+.draffles {
+  /* flex-wrap: wrap; */
+  width: 100%;
+  justify-content: space-around;
+  padding-top: 20px;
+  margin-bottom: 150px;
+
+  display: flex;
+  overflow-x: auto;
+  white-space: 'nowrap';
+}
+
+.draffle {
+  flex-direction: column;
+  padding-right: 20px;
+}
+
+.draffle-image {
+  overflow: hidden;
+  border-radius: 19px;
+  width: 255px;
+  height: 255px;
+  position: relative;
+}
+
+.draffle-info {
+  padding: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 19px;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 255px;
+  height: 150px;
+  flex-direction: column;
+}
+
+.draffle-info .collection {
+  font-size: x-small;
+  color: #79B2AF;
+}
+
+.draffle-info .name {
+  font-size: medium;
+  color: white;
+  font-weight: 600;
+}
+
+.draffle-info .author {
+  font-size: x-small;
+  color: white;
+}
+
+.draffle-info .remaining {
+  font-size: x-small;
+  color: #79B2AF;
+}
+
+.draffle-info .price {
+  font-size: x-small;
+  color: #79B2AF;
+}
+
+.draffle-info .number {
+  color: #DBEF60;
+  font-weight: 600;
+}
+
+.draffle-active {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.filters {
+  padding: 16px;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.filters-buttons {
+  justify-content: space-evenly;
+  width: 466px;
+}
+
+.filters-buttons .button-raffle {
+  height: 45px;
+}
+
+.filters-info {
+  justify-content: space-evenly;
+  width: 402px;
+}
+
+.raffle-image {
+  height: 100%;
+  padding-right: 50px;
+}
+
+.raffle-detail {
+  padding-top: 200px;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-bottom: 100px;
+  flex-wrap: wrap;
+}
+
+.raffle-detail-info {
+  width: 776px;
+}
+
+.connect-wallet {
+  padding: 30px;
+}
+
+.raffle-title {
+  color: #79B2AF;
+  font-weight: 700;
+  height: 150px;
+  border-radius: 19px;
+  background-color: #FFFFFF33;
+  padding: 20px 30px;
+  justify-content: center;
+}
+
+.raffle-details {
+  margin-top: 20px;
+  height: 560px;
+  border-radius: 19px;
+  background-color: #1A2828;
+  padding: 20px 30px;
+  justify-content: space-between;
+}
+
+.raffle-name {
+  color: white;
+  font-size: x-large;
+}
+
+.raffle-price {
+  color: white;
+  font-weight: 300;
+}
+
+.raffle-ticket {
+  color: #79B2AF;
+  height: 220px;
+  font-weight: 600;
+  justify-content: space-between;
+}
+
+.raffle-ticket-left {
+  width: 400px;
+}
+
+.raffle-left-top {
+  height: 112px;
+}
+
+.raffle-number {
+  color: white;
+}
+
+.raffle-terms {
+  padding: 20px 0px;
+  color: white;
+}
+
+.raffle-terms-title {
+  color: #76ED97;
+  font-weight: 600;
+  padding: 10px 0px;
+}
+
+.raffle-terms-info {
+  padding: 20px 30px;
+  border: 1px solid #76ED97;
+  border-radius: 19px;
+}
+
+.raffle-button-group {
+  width: 463px;
+  justify-content: space-between;
+}
+
+.raffle-content {
+  overflow-x: auto;
+  height: 442px;
+}
+
+.transaction-contents>div {
+  padding: 5px 0px;
+  align-items: center;
+  height: 30px;
+}
+
+.transaction-contents>div:nth-child(even) {
+  background: #79B2AF;
+}
+
+.raffle-wallets {
+  color: #76ED97;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.raffle-accounts {
+  color: white;
+}
+
+.raffle-accounts>div {
+  padding: 5px 0px;
+  align-items: center;
+  height: 30px;
+}
+
+.raffle-accounts>div:nth-child(even) {
+  background: #79B2AF;
+}
+
+.raffle-accounts-participants a {
+  padding: 5px;
+}
+
+.purchase-panel {
+  margin-top: 20px;
+  height: 290px;
+  justify-content: space-around;
+  border-radius: 19px;
+  background: #1A2828;
+  padding: 20px 30px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.purchase-right-panel {
+  display: none;
+}
+
+.purchase-left-panel {
+  display: flex;
+}
+
+.buy-ticket-panel {
+  align-items: center;
+  width: 300px;
+  justify-content: space-around;
+}
+
+.buy-sol-panel {
+  align-items: center;
+  width: 240px;
+  justify-content: space-around;
+}
+
+.nft-price-value {
+  width: 334px;
+  justify-content: space-between;
+}
+
+.spin-number {
+  height: 41px;
+  width: 100px;
+  border: 1px solid #76ED97;
+  border-radius: 9px 0px 0px 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.spin-up {
+  padding-left: 3px;
+  width: 22px;
+  height: 21px;
+  border: 1px solid #76ED97;
+  border-radius: 0px 9px 0px 0px;
+  border-left: none;
+}
+
+.spin-down {
+  padding-left: 3px;
+  width: 22px;
+  height: 20px;
+  border: 1px solid #76ED97;
+  border-radius: 0px 0px 9px 0px;
+  border-left: none;
+  border-top: none;
+}
+
+.ticket-price {
+  font-size: large;
+  color: white;
+  font-weight: 600;
+}
+
+.ticket-left {
+  font-size: medium;
+  color: #1E4848;
+  font-weight: 800;
+}
+
+.ticket-need-sol {
+  color: #76ED97;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.transaction-heading {
+  padding-bottom: 20px;
+}
+
+.transaction-heading div {
+  width: 25%;
+  color: #76ED97;
+  font-weight: 600;
+  min-width: 150px;
+}
+
+.transaction-content div {
+  width: 25%;
+  color: white;
+  font-weight: 400;
+  min-width: 150px;
+}
+
+.connect-button {
+  color: #99E6DB;
+  width: 133px;
+  height: 47px;
+}
+
+@media screen and (max-width: 917px) {
+  .filters-info {
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  .filters-buttons {
+    padding-top: 15px;
+    width: 100%;
+  }
+
+  .splitter {
+    display: none;
+  }
+
+  .raffle-detail-info {
+    width: 100%;
+  }
+
+  .raffle-details {
+    border-radius: 0px;
+  }
+
+  .raffle-button-group {
+    width: 100%;
+  }
+
+  .raffle-image {
+    padding: 24px;
+  }
+
+
+
+  .purchase-right-panel {
+    display: flex;
+    border-radius: 0;
+  }
+
+  .purchase-left-panel {
+    display: none;
+  }
+
+  .nft-price-value {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+
+.navbar {
+  display: none;
+  background: #1A2828;
+  width: 390px;
+  position: fixed;
+  flex-direction: column;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  z-index: 999;
+  color: #79B2AF;
+  font-weight: 700;
+  font-size: large;
+}
+
+.navbar-menu {
+  align-items: center;
+  flex-direction: column;
+}
+
+.navbar-menu div {
+  width: 233px;
+  cursor: pointer;
+  justify-content: flex-start;
+  padding: 10px;
+  align-items: center;
+}
+
+.navbar-icon {
+  padding: 42px 106px;
+}
+
+.filter {
+  display: none;
+  background: #1A2828;
+  width: 390px;
+  position: fixed;
+  flex-direction: column;
+  top: 0px;
+  right: 0px;
+  height: 100vh;
+  z-index: 999;
+  color: #79B2AF;
+  font-weight: 700;
+  font-size: large;
+  align-items: center;
+}
+
+.filter-menu {
+  flex-direction: column;
+}
+
+.filter-menu>div {
+  cursor: pointer;
+  justify-content: left;
+  padding: 5px;
+  align-items: center;
+}
+
+.filter-icon {
+  padding: 42px 106px;
+}
+
+.show-animation {
+  animation-duration: 1s;
+  animation-name: slidein;
+  display: flex;
+}
+
+.show-animation-2 {
+  animation-duration: 1s;
+  animation-name: slideRight;
+  display: flex;
+}
+
+.close-button {
+  cursor: pointer;
+  position: absolute;
+  width: 55px;
+  top: 36px;
+  right: 21px;
+}
+
+.filter-title {
+  cursor: default !important;
+  color: white;
+  font-size: 30px;
+}
+
+.filter-item {
+  width: 18px;
+
+}
+
+@keyframes slidein {
+  from {
+    margin-left: -30%;
+  }
+
+  to {
+    margin-left: 0%;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    margin-right: -30%;
+  }
+
+  to {
+    margin-right: 0%;
+  }
+}
+
+.creating {
+  width: 100%;
+  padding: 100px;
+  padding-top: 200px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.create-raffle-title {
+  color: #76ED97;
+  font-weight: 800;
+  font-size: xxx-large;
+}
+
+.creating-info {
+  justify-content: space-between;
+}
+
+.creating-info-left {
+  padding-right: 20px;
+  color: #79B2AF;
+  font-weight: 600;
+  width: 429px;
+  justify-content: space-between;
+}
+
+.raffle-token-title {
+  padding-bottom: 14px;
+}
+
+.creating-info-right {
+  width: 776px;
+  height: 560px;
+  background: #1A2828;
+  border-radius: 19px;
+  padding: 40px;
+  justify-content: space-between;
+  padding-top: 55px;
+}
+
+@media (min-width: 768px) {
+  .creating-raffle-info {
+    margin-bottom: 30px;
+    height: 159px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .creating-info-right {
+    width: 776px;
+    height: 560px;
+    background: #1A2828;
+    border-radius: 19px;
+    padding: 40px;
+    justify-content: space-between;
+  }
+}
+
+.raffle-tokens {
+  height: 202px;
+}
+
+.raffle-text {
+  color: #79B2AF;
+  font-weight: 600;
+}
+
+.creating-raffle-date {
+  width: 350px
+}
+
+.creating-raffle-detail {
+  width: 356px;
+  justify-content: space-between;
+}
+
+.creating-raffle-setting {
+  align-items: end;
+  padding-bottom: 20px;
+}
+
+.raffle-token-select {
+  padding-right: 20px;
+}
+
+.token-select-value {
+  width: 200px;
+  background: transparent;
+  border: 1px solid #76ED97;
+  border-radius: 9px;
+}
+
+
+
+.profile-name {
+  color: white;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.profile-detail {
+  padding: 100px;
+  padding-top: 200px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.profile-detail-left {
+  padding-right: 40px;
+  width: 384px;
+  justify-content: space-between;
+  padding-bottom: 50px;
+}
+
+.profile-detail-right {
+  height: 515px;
+  width: 800px;
+  background: #1A2828;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.profile-filter-group {
+  justify-content: space-evenly;
+  padding: 20px;
+  border-radius: 20px;
+  background: #1A2828;
+  height: 256px;
+}
+
+.profile-filter-group>div {
+  width: 100%;
+}
+
+.profile-info {
+  padding: 20px;
+  border-radius: 20px;
+  background: #1A2828;
+}
+
+.profile-raffle {
+  color: #76ED97;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.profile-detail-right .draffles {
+  width: 100%;
+  padding-bottom: 0px;
+  /* background: #1E4848; */
+  border-radius: 5px;
+  margin-bottom: 0px;
+}
+
+.selectnft {
+  flex-wrap: wrap;
+  padding-top: 70px;
+  padding-bottom: 60px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.selectnft-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.selectnft-title {
+  position: absolute;
+  top: 32px;
+  left: 39px;
+  color: white;
+  font-weight: 800;
+}
+
+.selectnft-item .button-raffle {
+  position: absolute;
+  top: 78px;
+  left: 30px;
+  font-size: smaller;
+}
+
+@media screen and (max-width: 1224px) {
+
+  .raffle-title {
+    margin: 20px;
+  }
+
+  .branding {
+    padding-top: 60px;
+  }
+
+  .header-buttons {
+    display: none;
+  }
+
+  .mobile-header-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 142px;
+  }
+
+  .raffle-detail {
+    justify-content: center;
+    padding-top: 100px;
+  }
+
+  .create-raffle-title {
+    justify-content: center;
+  }
+
+  .creating {
+    padding: 0px;
+    padding-top: 50px;
+  }
+
+  .creating-info {
+    flex-direction: column;
+  }
+
+  .creating-info-left {
+    padding: 50px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .creating-info-left>div {
+    padding: 5px;
+  }
+
+  .raffle-tokens {
+    height: 65px;
+  }
+
+  .creating-info-right {
+    justify-content: center;
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+  }
+
+  .profile-detail {
+    padding: 0px;
+    flex-direction: column;
+  }
+
+  .profile-detail-left {
+    padding: 100px 40px 40px 40px;
+    width: 100%;
+  }
+
+  .profile-raffle {
+    justify-content: center;
+  }
+
+  .profile-info {
+    margin-bottom: 40px;
+  }
+
+  .profile-info>div {
+    width: 100%;
+  }
+
+  .profile-info-title {
+    justify-content: center;
+  }
+
+  .profile-detail-right {
+    border-radius: 0px;
+    width: 100%;
+    margin-bottom: 100px;
+  }
+}
+
+.wallet-adapter-button-trigger {
+  background-color: #99E6DB;
+  color: black;
+}
+
+.sold-out {
+  color: red;
+}
+
+/* styles/Home.module.css */
+.about-creating {
+  width: 100%;
+  padding: 100px;
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: left; */
+}
+
+.module-container {
+  width: 100%;
+}
+
+.module-main {
+  padding: 20px;
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-raffle-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.module-section {
+  margin-bottom: 20px;
+}
+
+.about-raffle-section {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.about-raffle-content {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.about-raffle-content-bold {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.guide-tip-button {
+  background-color: #A26FFF; /* Adjust color to match the image */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px; /* Rounded edges */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none; /* Remove underline from text */
+  display: inline-block;
+}
+
+.guide-tip-button:hover {
+  background-color: #8A4FEF; /* Slightly darker shade for hover effect */
+}
+
+.loader-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears above other content */
+}

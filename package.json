@@ -1,0 +1,46 @@
+{
+  "name": "raffle-solana",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@metaplex-foundation/js": "^0.18.0",
+    "@metaplex/js": "^4.12.0",
+    "@moonpay/moonpay-react": "^1.7.2",
+    "@nfteyez/sol-rayz": "^0.10.2",
+    "@project-serum/anchor": "^0.26.0",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@solana/web3.js": "^1.91.3",
+    "axios": "^1.6.8",
+    "bs58": "^5.0.0",
+    "moment": "^2.30.1",
+    "next": "^14.2.3",
+    "pino-pretty": "^11.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-marquee-slider": "^1.1.5",
+    "react-toastify": "^10.0.5",
+    "styled-components": "^6.1.11",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
