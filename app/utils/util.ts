@@ -1,9 +1,10 @@
 import { web3 } from "@project-serum/anchor";
-import { RPC_URL } from "../config";
 import { programs } from "@metaplex/js";
 import { clusterApiUrl } from "@solana/web3.js";
 import { PublicKey } from "@solana/web3.js";
 import axios from "axios";
+
+require('dotenv').config();
 
 export function formatOrdinal(num: number): string {
     const suffixes = ["th", "st", "nd", "rd"];
@@ -19,9 +20,7 @@ export function formatName(name: string) {
     return name.length > 8 ? name.slice(0, 7) + "..." : name;
 }
 
-
-export const solConnection = new web3.Connection(clusterApiUrl("devnet"));
-// export const solConnection = new web3.Connection('https://devnet.helius-rpc.com/?api-key=67cbb36a-b35f-4c88-9240-c78a20c73f6c');
+export const solConnection = new web3.Connection(clusterApiUrl(process.env.NEXT_PUBLIC_NETWORK));
 
 
 // export const getNftMetaData = async (nftMintPk: PublicKey) => {

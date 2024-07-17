@@ -16,7 +16,7 @@ import BuyerTip from "../components/buyertip";
 
 const YOUR_CLIENT_ID = "1238328515116666920";
 const YOUR_CLIENT_SECRET = "2brjrzrSiRViRRb-rPx37A1wWcWGUUdb";
-const YOUR_REDIRECT_URI = "http://localhost:3000/guide/";
+const YOUR_REDIRECT_URI = "https://frontdev.solucky.online/guide/";
 
 export default function Guide() {
   const context = useContext(TodoContext);

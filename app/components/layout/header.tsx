@@ -13,6 +13,8 @@ import { getAddress } from "@/app/utils/util";
 
 import { ToastContainer, toast } from 'react-toastify';
 
+require('dotenv').config();
+
 const navbar_data = [
     {
         name: "My Profile",
@@ -71,7 +73,7 @@ export default function Header() {
         const showBalance = async () => {
             if (publicKey) {
                 const address = publicKey.toBase58();
-                const url = 'https://api.devnet.solana.com';
+                const url = process.env.NEXT_PUBLIC_RPC_URL;
                 const headers = {
                     'Content-Type': 'application/json',
                 };

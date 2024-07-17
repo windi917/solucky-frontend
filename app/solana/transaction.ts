@@ -16,8 +16,7 @@ import { AnchorWallet, WalletContextState } from "@solana/wallet-adapter-react";
 import { TOKEN_PROGRAM_ID } from "@project-serum/anchor/dist/cjs/utils/token";
 import {
     GLOBAL_AUTHORITY_SEED,
-    MYPRO_ID,
-    APE_TOKEN_MINT,
+    // APE_TOKEN_MINT,
     RAFFLE_SIZE,
     DECIMALS,
     ADMIN_WALLET,
@@ -27,6 +26,8 @@ import { useActionState } from "react";
 import { Poor_Story } from "next/font/google";
 import { bs58 } from "@project-serum/anchor/dist/cjs/utils/bytes";
 import { createTransaction } from "../api/transaction";
+
+require('dotenv').config();
 
 const splToken = require('@solana/spl-token');
 const { Metadata } = require('@metaplex-foundation/mpl-token-metadata');
@@ -38,7 +39,7 @@ const { Metadata } = require('@metaplex-foundation/mpl-token-metadata');
 export const globalAuthority = async () => {
     const [globalAuthority, bump] = await PublicKey.findProgramAddressSync(
         [Buffer.from(GLOBAL_AUTHORITY_SEED)],
-        new PublicKey(MYPRO_ID)
+        new PublicKey(process.env.NEXT_PUBLIC_MYPRO_ID)
     );
     return globalAuthority.toBase58();
 }
@@ -51,7 +52,7 @@ export const initProject = async (
 
     let provider = new anchor.AnchorProvider(solConnection, wallet as anchor.Wallet, { skipPreflight: true })
 
-    const program: anchor.Program<Raffle> = new anchor.Program(RaffleIDL, MYPRO_ID, provider) as anchor.Program<Raffle>;
+    const program: anchor.Program<Raffle> = new anchor.Program(RaffleIDL, process.env.NEXT_PUBLIC_MYPRO_ID, provider) as anchor.Program<Raffle>;
 
     const [globalAuthority, bump] = await PublicKey.findProgramAddressSync(
         [Buffer.from(GLOBAL_AUTHORITY_SEED)],
@@ -104,7 +105,7 @@ export const createRaffle = async (
     setLoading(true);
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, wallet as anchor.Wallet, { skipPreflight: true })
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     try {
 
         const tx = await createRaffleTx(
@@ -152,7 +153,7 @@ export const buyTicket = async (
     if (!wallet) return;
     const walletAddress = wallet.publicKey;
     let provider = new anchor.AnchorProvider(solConnection, wallet as anchor.Wallet, { skipPreflight: true })
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
 
 
 
@@ -215,7 +216,7 @@ export const revealWinner = async (
     const walletAddress = wallet.publicKey;
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     try {
         setLoading(true);
         const tx = await revealWinnerTx(
@@ -251,7 +252,7 @@ export const claimReward = async (
     const walletAddress = wallet.publicKey;
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     try {
         setLoading(true)
         const tx = await claimRewardTx(
@@ -286,7 +287,7 @@ export const withdrawNft = async (
     const walletAddress = wallet.publicKey;
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     try {
         setLoading(true);
         const tx = await withdrawNftTx(
@@ -647,7 +648,7 @@ var byteArrayToInt = function (byteArray: Buffer) {
 export const getAllData = async () => {
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     let poolAccounts = await solConnection.getProgramAccounts(
         program.programId,
         {
@@ -720,6 +721,7 @@ export const getAllData = async () => {
 
     }
 
+    console.log("-------------All Data--", result)
     return result;
 }
 
@@ -728,7 +730,7 @@ export const getRaffleKey = async (
 ): Promise<PublicKey | null> => {
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     let poolAccounts = await solConnection.getProgramAccounts(
         program.programId,
         {
@@ -774,7 +776,7 @@ export const getStateByKey = async (
 
     let cloneWindow: any = window;
     let provider = new anchor.AnchorProvider(solConnection, cloneWindow['solana'], anchor.AnchorProvider.defaultOptions())
-    const program = new anchor.Program(RaffleIDL as anchor.Idl, MYPRO_ID, provider);
+    const program = new anchor.Program(RaffleIDL as anchor.Idl, process.env.NEXT_PUBLIC_MYPRO_ID, provider);
     console.log("RaffleKey:", raffleKey.toBase58());
     try {
         let rentalState = await program.account.rafflePool.fetch(raffleKey);

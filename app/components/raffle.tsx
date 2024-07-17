@@ -149,7 +149,8 @@ export default function Raffle({ raffle, image }) {
             });
             return;
         }
-        if (new Date() > new Date(raffle.end_timestamp)) {
+        console.log("BUY_____", new Date(), new Date(raffle.end_timestamp * 1000), raffle.end_timestamp);
+        if (new Date() > new Date(raffle.end_timestamp * 1000)) {
             toast.error('Raffle ended!', {
                 position: "top-right",
                 autoClose: 5000,

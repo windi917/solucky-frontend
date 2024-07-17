@@ -25,7 +25,7 @@ export default function Create() {
 
     const { currentNFT } = context;
 
-    const [input, setInput] = useState("2024-06-11T18:49");
+    const [input, setInput] = useState(new Date().toISOString());
     const [token, setToken] = useState(0);
     const [rtoken, setRToken] = useState(null);
     const [ticket, setTicket] = useState(0);

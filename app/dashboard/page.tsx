@@ -68,8 +68,8 @@ export default function Home() {
   if (context.filterMode === 0) {
     raffles = raffles.filter(e => {
       const curTime = new Date();
-      const startTime = new Date(e.start_timestamp);
-      const endTime = new Date(e.end_timestamp);
+      const startTime = new Date(e.start_timestamp * 1000);
+      const endTime = new Date(e.end_timestamp * 1000);
 
       if (curTime > startTime && curTime < endTime)
         return true;
@@ -78,8 +78,8 @@ export default function Home() {
   } else if (context.filterMode === 2) {
     raffles = raffles.filter(e => {
       const curTime = new Date();
-      const startTime = new Date(e.start_timestamp);
-      const endTime = new Date(e.end_timestamp);
+      const startTime = new Date(e.start_timestamp * 1000);
+      const endTime = new Date(e.end_timestamp * 1000);
 
       if (curTime > endTime)
         return true;

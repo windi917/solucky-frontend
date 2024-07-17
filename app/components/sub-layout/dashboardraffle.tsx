@@ -1,6 +1,5 @@
 import Image from "next/image";
 import S_Button from "../common/button";
-import { MYPRO_ID } from "../../config";
 import { useRouter } from 'next/navigation'
 import { getAddress, solConnection } from "../../utils/util";
 import { useCallback, useEffect, useState } from "react";

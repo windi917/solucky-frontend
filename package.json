@@ -30,7 +30,8 @@
     "react-marquee-slider": "^1.1.5",
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.11",
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "^1.0.3",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/node": "^20",

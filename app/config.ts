@@ -5,9 +5,6 @@ export const RPC_URL = "https://api.devnet.solana.com";
 export const GLOBAL_AUTHORITY_SEED = "global-authority";
 export const EMPTY_USER = "11111111111111111111111111111111";
 
-// export const MYPRO_ID = "B4Gg1qfGjkHZNZxte12H4tWrvtcm6BwMBtkrHKL5UNJb";
-export const MYPRO_ID = "6p7XJtezjZMxjMKcz9FUjqPwM6duENy6PvE1aLcci9ZF";
-export const APE_TOKEN_MINT = new PublicKey("AsACVnuMa5jpmfp3BjArmb2qWg5A6HBkuXePwT37RrLY");
 export const ADMIN_WALLET = new PublicKey("84spPZ5P48hHURprjTZAaDGSMV6h3R6ivNeCyP7TugCc");
 export const RAFFLE_SIZE = 33000;
 export const DECIMALS = 100;
