@@ -85,7 +85,7 @@ export default function Create() {
             return;
         }
         console.log("currentNFT, rtoken, ttoken", currentNFT, rtoken, ttoken)
-        await createRaffle(
+        const res = await createRaffle(
             wallet,
             new PublicKey(currentNFT ? currentNFT.mint : rtoken),
             token,
@@ -95,6 +95,12 @@ export default function Create() {
             ticket, // count
             setLoading
         );
+
+        if ( res?.success === false ) {
+            toast.error("Create Raffle Error!");
+        } else {
+            toast.success("Create Raffle Success!");
+        }
     }
     return (
         <div className="creating flex-col max-w-screen-xl" style={{ height: '100%', overflow: 'auto' }}>

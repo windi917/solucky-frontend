@@ -13,7 +13,7 @@ export default function SELECT_NFT({ nfts }) {
         router.push('/create');
     }
     return (
-        <div className="selectnft">
+        <div className="mt-20 selectnft">
             {
                 nfts.map((e, i) => {
                     return (

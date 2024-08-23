@@ -4,9 +4,11 @@ import S_Button from './button';
 import { updateUser, getUserByWallet } from '@/app/api/user';
 import { saveToLocalStorage, getFromLocalStorage } from './localStorage';
 
-const YOUR_CLIENT_ID = "1238328515116666920";
+require('dotenv').config();
+
+const YOUR_CLIENT_ID = "1276261459763920977";
 const YOUR_CLIENT_SECRET = "2brjrzrSiRViRRb-rPx37A1wWcWGUUdb";
-const YOUR_REDIRECT_URI = "https://frontdev.solucky.online/guide/";
+const YOUR_REDIRECT_URI = `${process.env.NEXT_PUBLIC_FRONTEND}/guide/`;
 
 const DiscordAuthButton = ({ user, setUser }) => {
     const discordLoginUrl = `https://discord.com/api/oauth2/authorize?client_id=${YOUR_CLIENT_ID}&redirect_uri=${encodeURIComponent(YOUR_REDIRECT_URI)}&response_type=code&scope=identify`;    

@@ -20,7 +20,7 @@ export function formatName(name: string) {
     return name.length > 8 ? name.slice(0, 7) + "..." : name;
 }
 
-export const solConnection = new web3.Connection(clusterApiUrl(process.env.NEXT_PUBLIC_NETWORK));
+export const solConnection = new web3.Connection(process.env.NEXT_PUBLIC_RPC_URL || '');
 
 
 // export const getNftMetaData = async (nftMintPk: PublicKey) => {

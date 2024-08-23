@@ -120,18 +120,33 @@ export const createRaffle = async (
             1,
             max
         );
+
+        const blockHash = await program.provider.connection.getLatestBlockhash();
+
         tx.feePayer = wallet.publicKey;
-        tx.recentBlockhash = (await program.provider.connection.getLatestBlockhash()).blockhash;
+        tx.recentBlockhash = blockHash.blockhash;
         const signedTx = await wallet.signTransaction(tx);
         const txId = await program.provider.connection.sendRawTransaction(signedTx.serialize(), { skipPreflight: true });
 
         console.log("signedTx =", signedTx);
         console.log("txHash =", txId);
+
+        const signature = await solConnection.confirmTransaction(
+            {
+                blockhash: blockHash.blockhash,
+                lastValidBlockHeight: blockHash.lastValidBlockHeight,
+                signature: txId,
+            },
+            "finalized"
+        );
+
+        console.log("txHash =", signature);
         setLoading(false);
+        return { success: true, tx: signature };
     } catch (error) {
         console.log(error);
         setLoading(false);
-
+        return { success: false };
     }
 }
 
@@ -182,13 +197,27 @@ export const buyTicket = async (
             amount,
             0
         );
+
+        const blockHash = await program.provider.connection.getLatestBlockhash();
         tx.feePayer = wallet.publicKey;
-        tx.recentBlockhash = (await program.provider.connection.getLatestBlockhash()).blockhash;
+        tx.recentBlockhash = blockHash.blockhash;
         const signedTx = await wallet.signTransaction(tx);
         const txId = await program.provider.connection.sendRawTransaction(signedTx.serialize(), { skipPreflight: true });
 
+        const signature = await solConnection.confirmTransaction(
+            {
+                blockhash: blockHash.blockhash,
+                lastValidBlockHeight: blockHash.lastValidBlockHeight,
+                signature: txId,
+            },
+            "finalized"
+        );
 
-        console.log("txHash =", txId);
+        if (!signature)
+            return { success: false };
+
+        console.log("txHash =", signature);
+
         await createTransaction({
             txHash: txId,
             userId: walletAddress.toBase58(),
@@ -197,9 +226,13 @@ export const buyTicket = async (
             ticketCount: Number(amount)
         })
         setLoading(false);
+
+        return { success: true, tx: signature };
     } catch (error) {
         console.log(error)
         setLoading(false);
+
+        return { success: false };
     }
 }
 
@@ -224,17 +257,33 @@ export const revealWinner = async (
             walletAddress,
             raffleKey,
         );
+
+        const blockHash = await program.provider.connection.getLatestBlockhash();
         tx.feePayer = wallet.publicKey;
-        tx.recentBlockhash = (await program.provider.connection.getLatestBlockhash()).blockhash;
+        tx.recentBlockhash = blockHash.blockhash;
         const signedTx = await wallet.signTransaction(tx);
         const txId = await program.provider.connection.sendRawTransaction(signedTx.serialize(), { skipPreflight: true });
 
+        const signature = await solConnection.confirmTransaction(
+            {
+                blockhash: blockHash.blockhash,
+                lastValidBlockHeight: blockHash.lastValidBlockHeight,
+                signature: txId,
+            },
+            "finalized"
+        );
 
-        console.log("txHash =", txId);
+        if (!signature)
+            return { success: false };
+
+        console.log("txHash =", signature);
         setLoading(false);
+
+        return { success: true, tx: signature };
     } catch (error) {
         console.log(error);
         setLoading(true);
+        return { success: false };
     }
 }
 
@@ -261,15 +310,34 @@ export const claimReward = async (
             nft_mint,
             raffleKey
         );
+
+        const blockHash = await program.provider.connection.getLatestBlockhash();
         tx.feePayer = wallet.publicKey;
-        tx.recentBlockhash = (await program.provider.connection.getLatestBlockhash()).blockhash;
+        tx.recentBlockhash = blockHash.blockhash;
         const signedTx = await wallet.signTransaction(tx);
         const txId = await program.provider.connection.sendRawTransaction(signedTx.serialize(), { skipPreflight: true });
 
+        const signature = await solConnection.confirmTransaction(
+            {
+                blockhash: blockHash.blockhash,
+                lastValidBlockHeight: blockHash.lastValidBlockHeight,
+                signature: txId,
+            },
+            "finalized"
+        );
+
+        if (!signature)
+            return { success: false };
+
+        console.log("txHash =", signature);
         setLoading(false);
+
+        return { success: true, tx: signature };
     } catch (error) {
         console.log(error);
         setLoading(false)
+
+        return { success: false };
     }
 }
 
@@ -296,17 +364,33 @@ export const withdrawNft = async (
             nft_mint,
             raffleKey
         );
+        
+        const blockHash = await program.provider.connection.getLatestBlockhash();
         tx.feePayer = wallet.publicKey;
-        tx.recentBlockhash = (await program.provider.connection.getLatestBlockhash()).blockhash;
+        tx.recentBlockhash = blockHash.blockhash;
         const signedTx = await wallet.signTransaction(tx);
         const txId = await program.provider.connection.sendRawTransaction(signedTx.serialize(), { skipPreflight: true });
 
+        const signature = await solConnection.confirmTransaction(
+            {
+                blockhash: blockHash.blockhash,
+                lastValidBlockHeight: blockHash.lastValidBlockHeight,
+                signature: txId,
+            },
+            "finalized"
+        );
 
-        console.log("txHash =", txId);
+        if (!signature)
+            return { success: false };
+
+        console.log("txHash =", signature);
         setLoading(false);
+
+        return { success: true, tx: signature };
     } catch (error) {
         console.log("Withdraw Error:", error)
         setLoading(false);
+        return { success: false };
     }
 }
 
@@ -378,6 +462,7 @@ export const createRaffleTx = async (
         });
 
 
+        console.log("############", await solConnection.getMinimumBalanceForRentExemption(RAFFLE_SIZE))
         tx.add(ix);
         if (ix0.instructions.length > 0) tx.add(...ix0.instructions)
         if (ix1.instructions.length > 0 && ticket_mint.toBase58() != EMPTY_USER) tx.add(...ix1.instructions)
@@ -409,26 +494,26 @@ export const createRaffleTx = async (
 
         console.log("##$#$#$#$##$#", decimal1, decimal2)
 
-        const ix2 = await program.instruction.createRaffle(
-            new anchor.BN(raffle_token * 10 ** decimal1),
-            new anchor.BN(ticketPrice * 10 ** decimal2),
-            new anchor.BN(endTimestamp),
-            new anchor.BN(max),
-            {
-                accounts: {
-                    admin: userAddress,
-                    globalAuthority,
-                    raffle,
-                    createrTokenAccount: ownerNftAccount,
-                    destTokenAccount: ix0.destinationAccounts[0],
-                    tokenMintAddress: raffle_mint,
-                    tokenProgram: TOKEN_PROGRAM_ID,
-                    ticketTokenProgram: ticket_mint,
-                },
-                instructions: [],
-                signers: []
-            })
-        tx.add(ix2);
+        // const ix2 = await program.instruction.createRaffle(
+        //     new anchor.BN(raffle_token * 10 ** decimal1),
+        //     new anchor.BN(ticketPrice * 10 ** decimal2),
+        //     new anchor.BN(endTimestamp),
+        //     new anchor.BN(max),
+        //     {
+        //         accounts: {
+        //             admin: userAddress,
+        //             globalAuthority,
+        //             raffle,
+        //             createrTokenAccount: ownerNftAccount,
+        //             destTokenAccount: ix0.destinationAccounts[0],
+        //             tokenMintAddress: raffle_mint,
+        //             tokenProgram: TOKEN_PROGRAM_ID,
+        //             ticketTokenProgram: ticket_mint,
+        //         },
+        //         instructions: [],
+        //         signers: []
+        //     })
+        // tx.add(ix2);
         console.log("########################$$$$$$$$$$$$$$$$$", tx)
     }
 
@@ -939,7 +1024,7 @@ export const getAllTokens = async (
 
         for (let i = 0; i < fts.length; i++) {
             const metadata = await getMetadataPDA(new PublicKey(fts[i].tokenMint));
-            if ( metadata ) {
+            if (metadata) {
                 // console.log("-------Meta data-------", fts[i].tokenMint, metadata.data.symbol)
                 fts[i].tokenSymbol = metadata.data.symbol.replace(/[^\w\s]/g, '');
                 fts[i].tokenName = metadata.data.name.replace(/[^\w\s]/g, '');
@@ -981,7 +1066,7 @@ export const getAllFTokens = async (
 
         for (let i = 0; i < fts.length; i++) {
             const metadata = await getMetadataPDA(new PublicKey(fts[i].tokenMint));
-            if ( metadata ) {
+            if (metadata) {
                 // console.log("-------Meta data-------", fts[i].tokenMint, metadata.data.symbol)
                 fts[i].tokenSymbol = metadata.data.symbol.replace(/[^\w\s]/g, '');
             }

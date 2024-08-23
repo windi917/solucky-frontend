@@ -14,9 +14,11 @@ import { getFromLocalStorage } from "../components/common/localStorage";
 import MobileHeader from "../components/layout/mheader";
 import BuyerTip from "../components/buyertip";
 
+require('dotenv').config();
+
 const YOUR_CLIENT_ID = "1238328515116666920";
 const YOUR_CLIENT_SECRET = "2brjrzrSiRViRRb-rPx37A1wWcWGUUdb";
-const YOUR_REDIRECT_URI = "https://frontdev.solucky.online/guide/";
+const YOUR_REDIRECT_URI = `${process.env.NEXT_PUBLIC_FRONTEND}/guide/`;
 
 export default function Guide() {
   const context = useContext(TodoContext);

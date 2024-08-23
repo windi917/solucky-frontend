@@ -1,7 +1,5 @@
 import { PublicKey } from "@metaplex-foundation/js";
 
-export const RPC_URL = "https://api.devnet.solana.com";
-
 export const GLOBAL_AUTHORITY_SEED = "global-authority";
 export const EMPTY_USER = "11111111111111111111111111111111";
 

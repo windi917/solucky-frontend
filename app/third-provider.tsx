@@ -27,13 +27,15 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+require('dotenv').config();
+
 export default function ThirdProvider({
     children,
 }: {
     children: React.ReactNode
 }) {
     const network = WalletAdapterNetwork.Mainnet;
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+    const endpoint = useMemo(() => process.env.NEXT_PUBLIC_RPC_URL, [network]);
     const wallets = useMemo(
         () => [new PhantomWalletAdapter(), new SolflareWalletAdapter({ network })],
         [network]

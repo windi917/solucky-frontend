@@ -1,7 +1,8 @@
-const serverUrl = "https://backdev.solucky.online";
+require('dotenv').config();
+
 //  Create User
 export async function createUser(userData) {
-    const res = await fetch(serverUrl + '/users', {
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + '/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
@@ -15,7 +16,7 @@ export async function createUser(userData) {
 
 //   Get all users
 export async function getUsers() {
-    const res = await fetch(serverUrl + '/users');
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + '/users');
 
     if (!res.ok) throw new Error('Error fetching users');
 
@@ -25,7 +26,7 @@ export async function getUsers() {
 
 //   Get User By ID
 export async function getUserById(id) {
-    const res = await fetch(serverUrl + `/users/${id}`);
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/users/${id}`);
 
     if (!res.ok) throw new Error('Error fetching user');
 
@@ -36,7 +37,7 @@ export async function getUserById(id) {
 
 //   Get User By Wallet
 export async function getUserByWallet(wallet) {
-    const res = await fetch(serverUrl + `/users/wallet/${wallet}`);
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/users/wallet/${wallet}`);
 
     if (!res.ok) throw new Error('Error fetching user');
 
@@ -46,7 +47,7 @@ export async function getUserByWallet(wallet) {
 
 //   Update user
 export async function updateUser(id, userData) {
-    const res = await fetch(serverUrl + `/users/${id}`, {
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND + `/users/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),

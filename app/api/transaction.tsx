@@ -1,6 +1,9 @@
+
+require('dotenv').config();
+
 //  Create User
 export async function createTransaction(txData) { 
-    const res = await fetch('https://backdev.solucky.online/transactions', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/transactions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(txData),
@@ -14,7 +17,7 @@ export async function createTransaction(txData) {
 
 //   Get User By Wallet
 export async function getTransactionsByRaffle(raffleId) {
-    const res = await fetch(`https://backdev.solucky.online/transactions/${raffleId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/transactions/${raffleId}`);
 
     if (!res.ok) throw new Error('Error fetching transactions');
 

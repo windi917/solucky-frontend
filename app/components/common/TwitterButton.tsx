@@ -4,8 +4,10 @@ import S_Button from './button';
 import { updateUser, getUserByWallet } from '@/app/api/user';
 import { saveToLocalStorage, getFromLocalStorage } from './localStorage';
 
+require('dotenv').config();
+
 const TwitterAuthButton = ({ user, setUser }) => {
-    const twitterLoginURL = `https://backdev.solucky.online/auth/twitter`;
+    const twitterLoginURL = `${process.env.NEXT_PUBLIC_BACKEND}/auth/twitter`;
 
     const loginwithTwitter = async () => {
         saveToLocalStorage("tempStore", user);

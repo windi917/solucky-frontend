@@ -163,18 +163,43 @@ export default function Raffle({ raffle, image }) {
             });
             return;
         }
-        await buyTicket(wallet, new PublicKey(raffle.raffleKey), new PublicKey(raffle.ticket_token_program), ticket, setLoading);
+        const res = await buyTicket(wallet, new PublicKey(raffle.raffleKey), new PublicKey(raffle.ticket_token_program), ticket, setLoading);
+        if ( res?.success === false ) {
+            toast.error("Buy Ticket Error!");
+        } else {
+            toast.success("Buy Ticket Success!");
+        }
     }
 
     const withdraw_NFT = async () => {
-        await withdrawNft(wallet, new PublicKey(raffle.token_mint), new PublicKey(raffle.raffleKey), setLoading);
+        const res = await withdrawNft(wallet, new PublicKey(raffle.token_mint), new PublicKey(raffle.raffleKey), setLoading);
+        
+        if ( res?.success === false ) {
+            toast.error("Withdraw NFT Error!");
+        } else {
+            toast.success("Withdraw NFT Success!");
+        }
     }
 
     const claim_NFT = async () => {
-        await claimReward(wallet, new PublicKey(raffle.token_mint), new PublicKey(raffle.raffleKey), setLoading);
+        const res = await claimReward(wallet, new PublicKey(raffle.token_mint), new PublicKey(raffle.raffleKey), setLoading);
+
+        if ( res?.success === false ) {
+            toast.error("Claim NFT Error!");
+        } else {
+            toast.success("Claim NFT Success!");
+        }
     }
     const reveal_Winner = async () => {
-        await revealWinner(wallet, new PublicKey(raffle.raffleKey), setLoading);
+        const res = await revealWinner(wallet, new PublicKey(raffle.raffleKey), setLoading);
+
+        if ( res?.success === false ) {
+            toast.error("Reveal Winner Error!");
+            return;
+        } else {
+            toast.success("Reveal Winner Success!");
+        }
+
         await context.getData();
     }
     const counts = raffle.entrants.reduce((acc, value) => {
