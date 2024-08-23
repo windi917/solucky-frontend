@@ -180,7 +180,7 @@ export default function DashboardRaffles({ raffles }) {
                                             }
                                         </div>
                                     </div>
-                                    <S_Button click={() => router.push('/raffle/' + e.raffleKey + "/" + (_nft ? encodeURIComponent(_nft?.image) : "undefine/"))} b_name="View Raffle" color="#DBEF60" width="105px" height="31px" />
+                                    <S_Button click={() => router.push('/raffle/' + e.raffleKey)} b_name="View Raffle" color="#DBEF60" width="105px" height="31px" />
                                 </div>
                             </div>
                         </div>

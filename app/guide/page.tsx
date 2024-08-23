@@ -16,8 +16,8 @@ import BuyerTip from "../components/buyertip";
 
 require('dotenv').config();
 
-const YOUR_CLIENT_ID = "1238328515116666920";
-const YOUR_CLIENT_SECRET = "2brjrzrSiRViRRb-rPx37A1wWcWGUUdb";
+const YOUR_CLIENT_ID = "1276261459763920977";
+const YOUR_CLIENT_SECRET = "Mu96U70nj5hRDvcnA3547kMmUGOiekC0";
 const YOUR_REDIRECT_URI = `${process.env.NEXT_PUBLIC_FRONTEND}/guide/`;
 
 export default function Guide() {
@@ -25,9 +25,10 @@ export default function Guide() {
   const { user, setUser } = context;
   useEffect(() => {
     // Get code from URL
+    console.log("---------#@############");
     const url = window.location.href;
     const hasCode = url.includes("?code=");
-
+console.log("---------", url, hasCode);
     if (hasCode) {
       const newUrl = url.split("?code=");
       window.history.pushState({}, null, newUrl[0]);
@@ -41,6 +42,7 @@ export default function Guide() {
         scope: 'identify'
       };
 
+      console.log("#########----------", requestData);
       // Request for token
       axios.post('https://discord.com/api/oauth2/token', new URLSearchParams(requestData), {
         headers: {

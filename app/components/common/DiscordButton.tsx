@@ -7,7 +7,6 @@ import { saveToLocalStorage, getFromLocalStorage } from './localStorage';
 require('dotenv').config();
 
 const YOUR_CLIENT_ID = "1276261459763920977";
-const YOUR_CLIENT_SECRET = "2brjrzrSiRViRRb-rPx37A1wWcWGUUdb";
 const YOUR_REDIRECT_URI = `${process.env.NEXT_PUBLIC_FRONTEND}/guide/`;
 
 const DiscordAuthButton = ({ user, setUser }) => {
