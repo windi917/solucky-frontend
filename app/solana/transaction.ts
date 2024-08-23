@@ -494,26 +494,26 @@ export const createRaffleTx = async (
 
         console.log("##$#$#$#$##$#", decimal1, decimal2)
 
-        // const ix2 = await program.instruction.createRaffle(
-        //     new anchor.BN(raffle_token * 10 ** decimal1),
-        //     new anchor.BN(ticketPrice * 10 ** decimal2),
-        //     new anchor.BN(endTimestamp),
-        //     new anchor.BN(max),
-        //     {
-        //         accounts: {
-        //             admin: userAddress,
-        //             globalAuthority,
-        //             raffle,
-        //             createrTokenAccount: ownerNftAccount,
-        //             destTokenAccount: ix0.destinationAccounts[0],
-        //             tokenMintAddress: raffle_mint,
-        //             tokenProgram: TOKEN_PROGRAM_ID,
-        //             ticketTokenProgram: ticket_mint,
-        //         },
-        //         instructions: [],
-        //         signers: []
-        //     })
-        // tx.add(ix2);
+        const ix2 = await program.instruction.createRaffle(
+            new anchor.BN(raffle_token * 10 ** decimal1),
+            new anchor.BN(ticketPrice * 10 ** decimal2),
+            new anchor.BN(endTimestamp),
+            new anchor.BN(max),
+            {
+                accounts: {
+                    admin: userAddress,
+                    globalAuthority,
+                    raffle,
+                    createrTokenAccount: ownerNftAccount,
+                    destTokenAccount: ix0.destinationAccounts[0],
+                    tokenMintAddress: raffle_mint,
+                    tokenProgram: TOKEN_PROGRAM_ID,
+                    ticketTokenProgram: ticket_mint,
+                },
+                instructions: [],
+                signers: []
+            })
+        tx.add(ix2);
         console.log("########################$$$$$$$$$$$$$$$$$", tx)
     }
 
